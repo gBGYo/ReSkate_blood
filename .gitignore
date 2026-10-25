@@ -1,0 +1,12 @@
+/build/
+/dist/
+__pycache__/
+*.pyc
+# Compiled game assets are generated locally, never committed.
+/Win32/
+/Data/
+*.toc
+*.cas
+*.fbmod
+.reskate-studio-patch
+/assets.lock.json

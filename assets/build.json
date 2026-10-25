@@ -1,0 +1,9 @@
+{
+  "game_build": "20260929",
+  "skate_sha256": "fbce74d5e28ef525dbba2cb4adbebc13405bdbd88f31bc940bca45e4ae88b8f9",
+  "source": {
+    "repository": "https://github.com/gBGYo/ReSkate",
+    "branch": "feature/blood",
+    "commit": "ece0fb0873de771dd52accb8d0ab8cc7956f939b"
+  }
+}

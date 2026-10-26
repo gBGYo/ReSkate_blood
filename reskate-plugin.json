@@ -5,6 +5,7 @@
   "permissions": [
     "effects",
     "events.physics",
+    "events.physics.geometry",
     "skater.read",
     "menu",
     "storage",

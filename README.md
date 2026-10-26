@@ -24,7 +24,8 @@ with a SHA-256 sidecar. See [Repository and packaging](#repository-and-packaging
 
 Import the ZIP in the launcher's MODS page, or extract it into `Mods/gBGYo_Blood` beside the game.
 Requires a ReSkate runtime with the generalized `reskate.effects` plugin API and `physics_step`
-contact geometry/body poses, as provided by `feature/effects` at commit `4f07b44`.
+contact geometry/body poses. The manifest requests both `events.physics` and
+`events.physics.geometry`; without the geometry permission, impacts cannot be detected.
 The generated assets target Skate build **20260929**.
 
 ## Usage

@@ -20,7 +20,7 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual(plugin["api"], 1)
         self.assertEqual(plugin["side"], "client")
         self.assertEqual(set(plugin["permissions"]), {
-            "effects", "events.physics", "skater.read", "menu", "storage", "console",
+            "effects", "events.physics", "events.physics.geometry", "skater.read", "menu", "storage", "console",
         })
         effects = {
             f"effects/reskate/gbgyo_blood/ebp_blood_{kind}{tier}{color}"

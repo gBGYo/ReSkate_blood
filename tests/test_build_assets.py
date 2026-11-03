@@ -22,6 +22,7 @@ class BuildTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         shutil.copytree(REPO / "assets", self.root / "assets")
         shutil.copytree(REPO / "tools/asset_author", self.root / "tools/asset_author")
+        shutil.copyfile(REPO / "tools/prepare_decals.py", self.root / "tools/prepare_decals.py")
         for name in ("reskate-plugin.json", "manifest.json"):
             shutil.copyfile(REPO / name, self.root / name)
         self.game = self.root / "game"
@@ -52,7 +53,8 @@ class BuildTests(unittest.TestCase):
             (authored / "payload.cas").write_bytes(b"authored payload")
             rows = []
             names = [(1, name) for name in self.plugin["effects"]]
-            names += [(2, depot["name"]) for depot in self.plugin["resident"][0]["shaders"]]
+            self.assertTrue((Path(args[3]) / "splash_01.rgba").is_file())
+            names += [(2, depot["name"]) for resident in self.plugin["resident"] for depot in resident["shaders"]]
             for kind, name in names:
                 rows.append({"kind": kind, "name": name, "added": True, "file": "payload.cas", "size": 16,
                              "target": self.plugin["resident"][0]["bundle"], "meta": "", "type": 0, "rid": 1,

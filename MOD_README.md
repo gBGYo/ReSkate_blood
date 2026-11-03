@@ -4,6 +4,7 @@ Give your bails a bloodier aftermath. Blood adds impact spray, droplets, trails 
 lingering smears to your skater's falls and slides in Skate.
 
 - Spray and droplets react to impacts, with trails and smears left behind as you slide.
+- Twenty varied ground shapes add dark splashes, fine splatter, irregular pools and dragged smears.
 - Choose red, green, blue or pink blood.
 - Tune effect size, impact sensitivity, trail density, smear size, bleeding duration
   and how long marks remain. A **Reduced effects** option is also available.

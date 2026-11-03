@@ -48,29 +48,120 @@
     "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy_pink",
     "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy_pink",
     "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy_pink",
-    "world/materials/decal/reskate_blood/reskate_blood_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_broken_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_clotted_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_drop_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_green_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_broken_green_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_clotted_green_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_drop_green_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_blue_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_broken_blue_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_clotted_blue_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_drop_blue_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_pink_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_broken_pink_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_clotted_pink_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_drop_pink_dv"
+    "world/materials/decal/reskate_blood/reskate_blood_splash_01_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_02_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_03_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_04_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_05_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_01_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_02_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_03_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_04_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_05_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_01_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_02_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_03_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_04_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_05_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_01_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_02_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_03_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_04_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_05_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_01_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_02_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_03_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_04_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_05_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_01_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_02_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_03_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_04_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_05_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_01_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_02_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_03_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_04_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_05_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_01_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_02_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_03_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_04_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_05_green_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_01_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_02_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_03_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_04_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_05_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_01_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_02_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_03_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_04_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_05_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_01_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_02_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_03_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_04_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_05_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_01_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_02_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_03_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_04_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_05_blue_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_01_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_02_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_03_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_04_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_splash_05_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_01_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_02_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_03_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_04_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_smear_05_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_01_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_02_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_03_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_04_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_pool_05_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_01_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_02_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_03_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_04_pink_dv",
+    "world/materials/decal/reskate_blood/reskate_blood_drops_05_pink_dv"
   ],
   "resident": [
     {
       "bundle": "win32/levels/game/dingolevel_root/dingolevel_root",
       "roots": [
-        "effects/reskate/gbgyo_blood/",
-        "world/materials/decal/reskate_blood/"
+        "effects/reskate/gbgyo_blood/ebp_blood_spray",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_light",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_light",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_light",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_01_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_02_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_03_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_04_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_05_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_01_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_02_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_03_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_04_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_05_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_01_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_02_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_03_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_04_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_05_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_01_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_02_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_03_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_04_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_05_dv"
       ],
       "shaders": [
         {
@@ -88,29 +179,161 @@
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_01",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_01_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_broken",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_02",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_broken_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_02_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_clotted",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_03",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_clotted_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_03_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drop",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_04",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_drop_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_04_dv"
           ]
         },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_05",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_splash_05_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_01",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_01_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_02",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_02_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_03",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_03_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_04",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_04_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_05",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_05_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_01",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_01_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_02",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_02_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_03",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_03_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_04",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_04_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_05",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_05_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_01",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_01_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_02",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_02_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_03",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_03_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_04",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_04_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_05",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_05_dv"
+          ]
+        }
+      ]
+    },
+    {
+      "bundle": "win32/levels/game/dingolevel_root/dingolevel_root",
+      "roots": [
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_light_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_light_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_light_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy_green",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy_green",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_01_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_02_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_03_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_04_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_05_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_01_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_02_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_03_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_04_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_05_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_01_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_02_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_03_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_04_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_05_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_01_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_02_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_03_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_04_green_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_05_green_dv"
+      ],
+      "shaders": [
         {
           "name": "effects/reskate/gbgyo_blood/shaderblockdepot_blood_green",
           "roots": [
@@ -126,29 +349,161 @@
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_green",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_01_green",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_green_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_01_green_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_broken_green",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_02_green",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_broken_green_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_02_green_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_clotted_green",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_03_green",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_clotted_green_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_03_green_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drop_green",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_04_green",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_drop_green_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_04_green_dv"
           ]
         },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_05_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_splash_05_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_01_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_01_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_02_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_02_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_03_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_03_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_04_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_04_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_05_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_05_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_01_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_01_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_02_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_02_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_03_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_03_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_04_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_04_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_05_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_05_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_01_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_01_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_02_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_02_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_03_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_03_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_04_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_04_green_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_05_green",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_05_green_dv"
+          ]
+        }
+      ]
+    },
+    {
+      "bundle": "win32/levels/game/dingolevel_root/dingolevel_root",
+      "roots": [
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_light_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_light_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_light_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy_blue",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy_blue",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_01_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_02_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_03_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_04_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_05_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_01_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_02_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_03_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_04_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_05_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_01_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_02_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_03_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_04_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_05_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_01_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_02_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_03_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_04_blue_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_05_blue_dv"
+      ],
+      "shaders": [
         {
           "name": "effects/reskate/gbgyo_blood/shaderblockdepot_blood_blue",
           "roots": [
@@ -164,29 +519,161 @@
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_blue",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_01_blue",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_blue_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_01_blue_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_broken_blue",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_02_blue",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_broken_blue_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_02_blue_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_clotted_blue",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_03_blue",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_clotted_blue_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_03_blue_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drop_blue",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_04_blue",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_drop_blue_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_04_blue_dv"
           ]
         },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_05_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_splash_05_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_01_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_01_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_02_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_02_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_03_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_03_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_04_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_04_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_05_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_05_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_01_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_01_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_02_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_02_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_03_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_03_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_04_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_04_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_05_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_05_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_01_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_01_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_02_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_02_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_03_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_03_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_04_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_04_blue_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_05_blue",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_05_blue_dv"
+          ]
+        }
+      ]
+    },
+    {
+      "bundle": "win32/levels/game/dingolevel_root/dingolevel_root",
+      "roots": [
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_light_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_light_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_light_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy_pink",
+        "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy_pink",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_01_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_02_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_03_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_04_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_splash_05_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_01_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_02_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_03_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_04_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_smear_05_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_01_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_02_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_03_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_04_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_pool_05_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_01_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_02_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_03_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_04_pink_dv",
+        "world/materials/decal/reskate_blood/reskate_blood_drops_05_pink_dv"
+      ],
+      "shaders": [
         {
           "name": "effects/reskate/gbgyo_blood/shaderblockdepot_blood_pink",
           "roots": [
@@ -202,27 +689,123 @@
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pink",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_01_pink",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_pink_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_01_pink_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_broken_pink",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_02_pink",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_broken_pink_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_02_pink_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_clotted_pink",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_03_pink",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_clotted_pink_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_03_pink_dv"
           ]
         },
         {
-          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drop_pink",
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_04_pink",
           "roots": [
-            "world/materials/decal/reskate_blood/reskate_blood_drop_pink_dv"
+            "world/materials/decal/reskate_blood/reskate_blood_splash_04_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_splash_05_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_splash_05_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_01_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_01_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_02_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_02_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_03_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_03_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_04_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_04_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_smear_05_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_smear_05_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_01_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_01_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_02_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_02_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_03_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_03_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_04_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_04_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_pool_05_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_pool_05_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_01_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_01_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_02_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_02_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_03_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_03_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_04_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_04_pink_dv"
+          ]
+        },
+        {
+          "name": "world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_drops_05_pink",
+          "roots": [
+            "world/materials/decal/reskate_blood/reskate_blood_drops_05_pink_dv"
           ]
         }
       ]

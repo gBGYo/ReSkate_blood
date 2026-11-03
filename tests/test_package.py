@@ -28,19 +28,23 @@ class RepositoryTests(unittest.TestCase):
             for tier in ("", "_light", "_heavy")
             for color in ("", "_green", "_blue", "_pink")
         } | {
-            f"world/materials/decal/reskate_blood/reskate_blood{variant}{color}_dv"
-            for variant in ("", "_broken", "_clotted", "_drop")
+            f"world/materials/decal/reskate_blood/reskate_blood_{family}_{variant:02d}{color}_dv"
+            for family in ("splash", "smear", "pool", "drops")
+            for variant in range(1, 6)
             for color in ("", "_green", "_blue", "_pink")
         }
-        self.assertEqual(len(plugin["effects"]), 52)
+        self.assertEqual(len(plugin["effects"]), 116)
         self.assertEqual(set(plugin["effects"]), effects)
-        resident, = plugin["resident"]
-        self.assertEqual(resident["bundle"], packer.COMMON_ROOT[:-4].lower())
-        self.assertEqual(len(resident["shaders"]), 20)
-        self.assertEqual({root for depot in resident["shaders"] for root in depot["roots"]}, effects)
+        self.assertEqual(len(plugin["resident"]), 4)
+        shaders = [depot for resident in plugin["resident"] for depot in resident["shaders"]]
+        for resident in plugin["resident"]:
+            self.assertEqual(resident["bundle"], packer.COMMON_ROOT[:-4].lower())
+            self.assertLessEqual(len(resident["shaders"]), 32)
+        self.assertEqual(len(shaders), 84)
+        self.assertEqual({root for depot in shaders for root in depot["roots"]}, effects)
         for effect in effects:
             self.assertTrue(any(effect == root or (root.endswith("/") and effect.startswith(root))
-                                for root in resident["roots"]), effect)
+                                for resident in plugin["resident"] for root in resident["roots"]), effect)
 
 class PackagingTests(unittest.TestCase):
     def setUp(self):
@@ -53,6 +57,7 @@ class PackagingTests(unittest.TestCase):
         shutil.copytree(REPO / "plugin", self.root / "plugin")
         shutil.copytree(REPO / "assets", self.root / "assets")
         shutil.copytree(REPO / "tools/asset_author", self.root / "tools/asset_author")
+        shutil.copyfile(REPO / "tools/prepare_decals.py", self.root / "tools/prepare_decals.py")
         self.assets = self.root / "build/assets/Patch"
         config = json.loads((self.root / "assets/build.json").read_text())
         self.lock = {"skate_sha256": config["skate_sha256"],
@@ -109,6 +114,12 @@ class PackagingTests(unittest.TestCase):
         del self.lock["files"][packer.COMMON_ROOT]
         self.save_lock()
         with self.assertRaisesRegex(ValueError, "common-root"):
+            packer.payload(self.root)
+
+    def test_edited_source_texture_requires_a_rebuild(self):
+        texture = self.root / "assets/decals/splash_01/color.png"
+        texture.write_bytes(texture.read_bytes() + b"edited")
+        with self.assertRaisesRegex(ValueError, "asset recipes changed"):
             packer.payload(self.root)
 
     def test_missing_asset_is_refused(self):

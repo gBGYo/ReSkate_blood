@@ -30,7 +30,13 @@ inline constexpr std::array blood_asset_names = {
     "effects/reskate/gbgyo_blood/ebp_blood_spray", "effects/reskate/gbgyo_blood/ebp_blood_droplets", "effects/reskate/gbgyo_blood/ebp_blood_trail",
     "effects/reskate/gbgyo_blood/ebp_blood_spray_light", "effects/reskate/gbgyo_blood/ebp_blood_droplets_light", "effects/reskate/gbgyo_blood/ebp_blood_trail_light",
     "effects/reskate/gbgyo_blood/ebp_blood_spray_heavy", "effects/reskate/gbgyo_blood/ebp_blood_droplets_heavy", "effects/reskate/gbgyo_blood/ebp_blood_trail_heavy"};
-inline constexpr std::array blood_ground_materials = {
-    "world/materials/decal/reskate_blood/reskate_blood_dv", "world/materials/decal/reskate_blood/reskate_blood_broken_dv",
-    "world/materials/decal/reskate_blood/reskate_blood_clotted_dv", "world/materials/decal/reskate_blood/reskate_blood_drop_dv"};
+inline constexpr std::array blood_ground_shapes = {
+    "splash_01", "splash_02", "splash_03", "splash_04", "splash_05",
+    "smear_01", "smear_02", "smear_03", "smear_04", "smear_05",
+    "pool_01", "pool_02", "pool_03", "pool_04", "pool_05",
+    "drops_01", "drops_02", "drops_03", "drops_04", "drops_05"};
+inline std::string blood_ground_stem(unsigned shape, unsigned color) {
+    return std::string("world/materials/decal/reskate_blood/reskate_blood_")+
+        blood_ground_shapes.at(shape)+blood_color_suffixes.at(color);
+}
 }

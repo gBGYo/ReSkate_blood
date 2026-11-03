@@ -10,9 +10,11 @@ import tempfile
 
 if __package__:
     from . import fbmod
+    from .prepare_decals import prepare as prepare_decals
     from .package import REPO, COMMON_ROOT, asset_payload, author_source_hash, validate_effects
 else:
     import fbmod
+    from prepare_decals import prepare as prepare_decals
     from package import REPO, COMMON_ROOT, asset_payload, author_source_hash, validate_effects
 
 RESOURCE_LIBRARIES = ("game_archives", "native_db", "frostbite", "json", "mods", "mod_list",
@@ -67,10 +69,11 @@ def validate_authored(authored, plugin):
         kind = "EffectBlueprint" if name.startswith("effects/") else "EnvironmentDecalVolumeTemplateData"
         if not row.get("added") or row.get("target") != bundle or row.get("root_type") != kind:
             raise ValueError(f"Missing or incompatible authored Blood effect: {name}")
-    for depot in plugin["resident"][0]["shaders"]:
-        row = rows.get((2, depot["name"]), {})
-        if not row.get("added") or row.get("target") != bundle:
-            raise ValueError(f"Missing resident Blood shader: {depot['name']}")
+    for resident in plugin["resident"]:
+        for depot in resident["shaders"]:
+            row = rows.get((2, depot["name"]), {})
+            if not row.get("added") or row.get("target") != resident["bundle"]:
+                raise ValueError(f"Missing resident Blood shader: {depot['name']}")
 
 
 def record_assets(patch, config, author, compiler, root=REPO):
@@ -107,8 +110,9 @@ def build(game, compiler, reskate_source, output=REPO / "build/assets", root=REP
         if not work.is_relative_to(output) or work == output:
             raise ValueError("Temporary build directory is outside the output directory")
         authored, fbmod_path, compiled = work / "authored", work / "blood.fbmod", work / "compiled"
+        textures = prepare_decals(work / "textures", root)
         print("Authoring Blood effects from the supported game files...", flush=True)
-        subprocess.run([str(author), str(game), str(authored)], check=True, cwd=work)
+        subprocess.run([str(author), str(game), str(authored), str(textures)], check=True, cwd=work)
         validate_authored(authored, plugin)
         fbmod.package(authored, fbmod_path, version)
         print("Compiling the Blood asset patch...", flush=True)
@@ -117,7 +121,7 @@ def build(game, compiler, reskate_source, output=REPO / "build/assets", root=REP
         # The merge verifier needs the resident declarations to test all maps.
         for name in ("reskate-plugin.json", "manifest.json"):
             shutil.copyfile(root / name, patch / name)
-        print("Verifying all 52 effects in the common level root...", flush=True)
+        print(f"Verifying all {len(plugin['effects'])} effects in the common level root...", flush=True)
         subprocess.run([str(author), str(game), str(patch), "--verify-merge"], check=True, cwd=work)
         record_assets(patch, config, author, compiler, root)
         files = asset_payload(patch, root)

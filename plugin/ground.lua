@@ -2,7 +2,7 @@ local V = require("math3")
 local Ground = {}
 Ground.__index = Ground
 local colors={"","_green","_blue","_pink"}
-local variants={"","_broken","_clotted","_drop"}
+local variant_count=5
 local function cell(x,y,z) return x..":"..y..":"..z end
 local function surface(b)
     return b and b.contact and b.normal and b.point and not b.board and
@@ -92,7 +92,7 @@ function Ground:retire()
     end
     if victim then victim.retirement=2; self.retiring+=1 end
 end
-function Ground:stamp(point,normal,direction,width,length,kind,variant,impact,vehicle)
+function Ground:stamp(point,normal,direction,width,length,kind,variant,impact,vehicle,family)
     if kind==4 and #self.marks>=1536 then return end
     local right=V.tangent(direction,normal)
     local shallow=vehicle or normal.y<=.5
@@ -104,7 +104,7 @@ function Ground:stamp(point,normal,direction,width,length,kind,variant,impact,ve
     if self:crowded(m) then return end
     self:retire()
     if #self.marks>=(impact and 2048 or 1920) then return end
-    local material="world/materials/decal/reskate_blood/reskate_blood"..variants[kind==5 and variant or kind]..colors[self.options.color].."_dv"
+    local material=string.format("world/materials/decal/reskate_blood/reskate_blood_%s_%02d%s_dv",family,variant,colors[self.options.color])
     m.handle=self.api.decal(material,V.matrix(x,normal*depth,z,point+normal*lift),{attach=true,lift=lift})
     if not m.handle then return end
     m.cell=cell(math.floor(point.x),math.floor(point.y),math.floor(point.z))
@@ -117,13 +117,15 @@ function Ground:deposit(w,point,normal,direction,width,initial)
     local r=table.create(10)
     for i=1,10 do r[i]=random(w) end
     local stretched=w.torso and not initial and r[2]<.42
-    local length=w.torso and (stretched and .36+.19*r[7] or .16+.16*r[7]) or initial and .13+.08*r[7] or .09+.21*r[7]
+    local length=w.torso and (stretched and .65+.25*r[7] or .40+.25*r[7]) or initial and .13+.08*r[7] or .09+.21*r[7]
     w.spacing=(w.torso and ((.14+.6*length+.14*r[1])*(r[1]<.3 and .5 or 1)+(r[9]<.16 and .14 or 0)) or
         .055+.105*r[1]+(r[2]<.16 and .11 or 0))*(o.reduced and 1.8 or 1)/o.density
-    if w.torso then
-        local choice=math.floor(r[5]*(w.variant and 2 or 3))
-        w.variant=w.variant and (w.variant+choice)%3+1 or choice+1
-    end
+    local family=initial and "splash" or w.torso and "smear" or "pool"
+    w.variants=w.variants or {}
+    local previous=w.variants[family]
+    local choice=math.floor(r[5]*(previous and variant_count-1 or variant_count))
+    local variant=previous and (previous+choice)%variant_count+1 or choice+1
+    w.variants[family]=variant
     direction=V.tangent(direction,normal)
     local side=vector.cross(direction,normal)
     local angle=(r[3]-.5)*.7+(w.torso and r[10]<.5 and math.pi or 0)
@@ -133,14 +135,18 @@ function Ground:deposit(w,point,normal,direction,width,initial)
         local response=V.response(w.severity)
         local scale=initial and response.stain or response.trail
         local breadth=width*(w.torso and (stretched and .6+.35*r[6] or .8+.35*r[6]) or .5+r[6])
-        self:stamp(point,normal,axis,breadth*scale*o.width,length*scale*o.length,w.torso and 5 or math.min(3,math.floor(r[5]*3)+1),w.variant,initial,w.vehicle)
+        -- Splash and pool textures use square footprints to retain their shape.
+        -- Smears keep independent width/length controls and follow the slide axis.
+        if initial then length=math.max(breadth,length); breadth=length
+        elseif not w.torso then length=math.max(breadth,length*.65); breadth=length end
+        self:stamp(point,normal,axis,breadth*scale*o.width,length*scale*o.length,w.torso and 5 or 1,variant,initial,w.vehicle,family)
         self.budget-=1
     end
     if not initial and not o.reduced and r[8]<(w.torso and .2 or .6) and self.budget>0 then
         local lateral=(r[9]<.5 and -1 or 1)*(w.torso and width*(.28+.14*r[10]) or .035+.075*r[10])
         point+=side*lateral-direction*.025
-        local size=.025+.04*r[9]
-        self:stamp(point,normal,side,size,size*(.8+.4*r[10]),4,1,false,w.vehicle); self.budget-=1
+        local size=.06+.08*r[9]
+        self:stamp(point,normal,axis,size,size,4,math.floor(r[10]*variant_count)+1,false,w.vehicle,"drops"); self.budget-=1
     end
 end
 function Ground:step(f,hits,o)

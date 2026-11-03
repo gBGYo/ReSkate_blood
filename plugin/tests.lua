@@ -1,5 +1,6 @@
 local Model=require("model")
 local V=require("math3")
+local Ground=require("ground")
 local function recorder()
     local r={serial=0,live={},particles=0,decals=0,stopped=0,faded=0,released=0}
     local api={}
@@ -136,6 +137,38 @@ return {run=function()
         m:step(rotated(100,-.5,false),o)
         m:step(rotated(150,-.5,true),o)
         assert(r.particles==3 and r.decals==1)
+    end)
+    test("generated decal families, variation and pigments",function()
+        for color,suffix in {"","_green","_blue","_pink"} do
+            local r,api=recorder()
+            local g=Ground.new(api)
+            g.options=Model.options({enabled=true,color=color}); g.budget=1000; g.retiring=0
+            local seen={}
+            for _,case in {{true,false,"splash"},{false,true,"smear"},{false,false,"pool"}} do
+                local initial,broad,family=case[1],case[2],case[3]
+                local w={torso=broad,random=1234567,severity=144}
+                local previous
+                for index=1,30 do
+                    local before=#g.marks
+                    g:deposit(w,vector.create(index*3,0,broad and 4 or initial and 8 or 0),V.up,vector.create(1,0,0),.3,initial)
+                    local mark=g.marks[before+1]
+                    assert(mark,"missing primary mark")
+                    local asset=r.live[mark.handle].asset
+                    assert(asset:find("reskate_blood_"..family.."_") and asset:sub(-#suffix-3)==suffix.."_dv")
+                    assert(asset~=previous,"consecutive primary variant repeated")
+                    previous=asset
+                    if initial then
+                        assert(math.abs(vector.magnitude(mark.x)-vector.magnitude(mark.z))<.0001,"splash footprint is stretched")
+                    end
+                    for i=before+1,#g.marks do seen[r.live[g.marks[i].handle].asset]=true end
+                end
+            end
+            for _,family in {"splash","smear","pool","drops"} do
+                for variant=1,5 do
+                    assert(seen[string.format("world/materials/decal/reskate_blood/reskate_blood_%s_%02d%s_dv",family,variant,suffix)],"unused generated decal")
+                end
+            end
+        end
     end)
     reskate.console.print(string.format("blood: %d tests passed",passed))
 end}

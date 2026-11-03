@@ -1,5 +1,6 @@
 /build/
 /dist/
+/.venv-decal-lab/
 __pycache__/
 *.pyc
 # Compiled game assets are generated locally, never committed.

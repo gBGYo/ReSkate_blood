@@ -14,10 +14,11 @@ METADATA = (
 COMMON_ROOT = "Win32/levels/game/dingolevel_root/dingolevel_root.toc"
 DEFAULT_ASSETS = REPO / "build/assets/Patch"
 AUTHOR_SOURCES = (
-    "assets/build.json", "tools/asset_author/CMakeLists.txt",
+    "assets/build.json", "reskate-plugin.json", "tools/asset_author/CMakeLists.txt",
     "tools/asset_author/resource_libraries/CMakeLists.txt",
     "tools/asset_author/blood_asset_author.cpp", "tools/asset_author/blood_assets.h",
     "tools/asset_author/blood_ground_asset.h",
+    "tools/prepare_decals.py",
 )
 
 
@@ -27,6 +28,13 @@ def author_source_hash(root=REPO):
         digest.update(name.encode("utf-8") + b"\0")
         # Git's newline conversion must not invalidate an otherwise identical recipe.
         digest.update((Path(root) / name).read_text(encoding="utf-8").encode("utf-8") + b"\0")
+    # Editable source textures participate in freshness checks, even though only
+    # compiled game resources are shipped. PNG bytes must not be newline-normalized.
+    for path in sorted((Path(root) / "assets/decals").rglob("*")):
+        if path.is_file() and path.suffix in {".png", ".json"}:
+            digest.update(path.relative_to(root).as_posix().encode("utf-8") + b"\0")
+            data = path.read_text(encoding="utf-8").encode("utf-8") if path.suffix == ".json" else path.read_bytes()
+            digest.update(data + b"\0")
     return digest.hexdigest()
 
 
@@ -82,6 +90,7 @@ def validate_effects(plugin):
 
 def payload(root=REPO, version=None, assets=None):
     root = Path(root)
+    validate_effects(json.loads((root / "reskate-plugin.json").read_text(encoding="utf-8")))
     directory = Path(assets) if assets is not None else root / "build/assets/Patch"
     files = asset_payload(directory, root)
     for name in METADATA:

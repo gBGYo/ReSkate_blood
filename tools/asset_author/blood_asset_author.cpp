@@ -169,12 +169,12 @@ int main(int argc,char** argv) {
                 const auto selected=static_cast<blood::assets::BloodColor>(color);
                 for (const auto* name:blood::assets::blood_asset_names)
                     require_asset(blood::assets::blood_colored_asset(name,selected));
-                for (const auto* name:blood::assets::blood_ground_materials)
-                    require_asset(blood::assets::blood_colored_asset(name,selected));
+                for (unsigned shape=0;shape<blood::assets::blood_ground_shapes.size();++shape)
+                    require_asset(blood::assets::blood_ground_stem(shape,color)+"_dv");
             }
-            std::cout<<"Blood package merged without conflicts; all 36 effects and 16 materials are in the common level root.\n"; return 0;
+            std::cout<<"Blood package merged without conflicts; all 36 effects and "<<ground_variant_count<<" materials are in the common level root.\n"; return 0;
         }
-        if (argc!=3) throw std::runtime_error("usage: blood_asset_author <supported Skate folder> <output folder> [--verify-merge]");
+        if (argc!=4) throw std::runtime_error("usage: blood_asset_author <supported Skate folder> <output folder> <prepared textures folder | --verify-merge>");
         dingosdk::vfs::GameData data(argv[1]);
         const auto toc=data.read_toc("Win32/customization.toc");
         const auto bundle=data.read_bundle(toc,donor_bundle);
@@ -391,7 +391,7 @@ int main(int argc,char** argv) {
             a.name=effect_name; emit(fb::AssetKind::ebx,a,effect_raw,true);
         }
         }
-        author_blood_ground(data,emit);
+        author_blood_ground(data,fs::path(argv[3]),emit);
         // The private particle scope reuses its stock compiled program. Alias the
         // material key in the root tables, preserving every existing row.
         const auto root_toc=data.read_toc("Win32/levels/game/dingolevel_root/dingolevel_root.toc");
@@ -411,6 +411,6 @@ int main(int argc,char** argv) {
         }
         if (lookups!=2) throw std::runtime_error("Expected both root particle lookup tables");
         std::ofstream(out/"resources.json")<<Json{{"schema",1},{"resources",rows},{"donor",donor_bundle},{"target",target}}.dump(2);
-        std::cout<<"Authored 36 private blood effects, 16 ground blood materials and "<<rows.size()<<" verified payloads.\n";
+        std::cout<<"Authored 36 private blood effects, "<<ground_variant_count<<" ground blood materials and "<<rows.size()<<" verified payloads.\n";
     } catch (const std::exception& e) {std::cerr<<e.what()<<'\n';return 1;}
 }

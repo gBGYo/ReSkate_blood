@@ -4,8 +4,8 @@
 namespace {
 constexpr std::uint64_t ground_stock_material=0x9b3233728e841bc0ULL;
 constexpr std::uint64_t ground_blood_material=0x5ba7a219be430019ULL;
-constexpr unsigned ground_variant_count=16;
-constexpr std::array ground_suffixes={"","_broken","_clotted","_drop"};
+constexpr unsigned ground_shape_count=static_cast<unsigned>(blood::assets::blood_ground_shapes.size());
+constexpr unsigned ground_variant_count=ground_shape_count*4;
 constexpr std::uint64_t ground_key(unsigned variant) {return ground_blood_material+variant*0x100;}
 fb::Guid ground_guid(unsigned slot,unsigned variant=0) {
     if (variant) {
@@ -39,59 +39,32 @@ fb::Guid ground_guid(unsigned slot,unsigned variant=0) {
     fb::Guid id; for (unsigned i=0;i<16;++i) id.bytes[i]=std::byte(bytes[i]); return id;
 }
 fb::Guid blood_particle_chunk(unsigned color) {
-    return color ? ground_guid(0x12,ground_variant_count+color) : private_guid(3,0x302);
+    return color ? ground_guid(0x12,0x1000+color) : private_guid(3,0x302);
 }
 ebx::InstanceRecord& ground_instance(ebx::Document& d) {return d.instances.at(d.root()-d.instances.data());}
-fb::Image blood_smear_image(unsigned variant) {
-    fb::Image image{256,128,std::vector<std::uint8_t>(256*128*4)};
-    std::uint32_t seed=0xa91f321u+variant*7919;
-    auto random=[&]() {seed^=seed<<13; seed^=seed>>17; seed^=seed<<5; return float(seed>>8)/16777216;};
-    struct Blot {float u,v,rx,ry,alpha;};
-    std::vector<Blot> blots;
-    if (variant==3) {
-        blots.push_back({0,0,.57f,.59f,.97f});
-        for (unsigned i=0;i<6;++i) {
-            const float angle=random()*6.283185f,radius=.65f+.12f*random(),size=.03f+.06f*random();
-            blots.push_back({std::cos(angle)*radius,std::sin(angle)*radius,size,size,.7f+.25f*random()});
-        }
-    } else {
-        // Unequal overlapping lobes and dragged fingers, with exposed receiver
-        // between them. No full rectangular/oval base that repeated stamps fill.
-        for (unsigned i=0;i<24;++i) {
-            const float u=-.7f+1.4f*random(),v=(random()-.5f)*.85f;
-            const float rx=variant==2 ? .06f+.16f*random() : .13f+.24f*random();
-            const float ry=variant==1 ? .012f+.065f*random() : .025f+.16f*random();
-            blots.push_back({u,v,rx,ry,.38f+.57f*random()});
-        }
-    }
-    for (unsigned y=0;y<image.height;++y) for (unsigned x=0;x<image.width;++x) {
-        const float u=(x+.5f)/128-1,v=(y+.5f)/64-1;
-        const float rough=.055f*std::sin(u*67+v*43)+.035f*std::sin(u*137-v*79);
-        float opacity{};
-        for (const auto& blot:blots) {
-            const float du=(u-blot.u)/blot.rx,dv=(v-blot.v)/blot.ry;
-            opacity=std::max(opacity,std::clamp((1-du*du-dv*dv+rough)*9,0.f,1.f)*blot.alpha);
-        }
-        if (variant!=3) {
-            const float scrape=std::sin(v*191+std::sin(u*13)*.9f);
-            opacity*=scrape>.75f ? .12f : .78f+.22f*std::sin(u*31+v*97)*std::sin(v*53);
-        }
-        opacity*=std::clamp((1-std::max(std::abs(u),std::abs(v)))*20,0.f,1.f);
-        const auto at=4*(y*image.width+x);
-        // Keep the dark pigment, but give it enough red and opacity to read
-        // against asphalt and concrete without adding more decal stamps.
-        const float red=72+12*std::sin(u*17+v*11)*std::sin(v*29);
-        image.rgba[at]=static_cast<std::uint8_t>(red);
-        image.rgba[at+1]=3; image.rgba[at+2]=6;
-        image.rgba[at+3]=static_cast<std::uint8_t>(std::clamp(opacity*(variant==3 ? 1.1f : 1.5f),0.f,1.f)*245);
-    }
+fb::Image blood_decal_image(const fs::path& directory,unsigned shape) {
+    const auto path=directory/(std::string(blood::assets::blood_ground_shapes.at(shape))+".rgba");
+    std::ifstream file(path,std::ios::binary|std::ios::ate);
+    if (!file) throw std::runtime_error("Missing prepared decal texture: "+path.string());
+    const auto size=file.tellg();
+    constexpr unsigned side=512;
+    if (size!=12+side*side*4) throw std::runtime_error("Invalid prepared decal size: "+path.string());
+    std::vector<std::byte> bytes(static_cast<std::size_t>(size));
+    file.seekg(0); file.read(reinterpret_cast<char*>(bytes.data()),size);
+    if (!file || get<std::uint32_t>(bytes,0)!=0x31444c42 ||
+        get<std::uint32_t>(bytes,4)!=side || get<std::uint32_t>(bytes,8)!=side)
+        throw std::runtime_error("Invalid prepared decal header: "+path.string());
+    fb::Image image{side,side,std::vector<std::uint8_t>(side*side*4)};
+    std::memcpy(image.rgba.data(),bytes.data()+12,image.rgba.size());
     return image;
 }
 void verify_blood_chunk_hashes() {
     std::vector<fb::Guid> ids;
     for (unsigned color=0;color<4;++color) ids.push_back(blood_particle_chunk(color));
-    for (unsigned variant=0;variant<ground_variant_count;++variant)
-        for (unsigned slot:{0x12u,0x22u,0x32u}) ids.push_back(ground_guid(slot,variant));
+    // The normal is shared globally; opacity maps are shared between pigments.
+    ids.push_back(ground_guid(0x22));
+    for (unsigned shape=0;shape<ground_shape_count;++shape) ids.push_back(ground_guid(0x32,shape));
+    for (unsigned variant=0;variant<ground_variant_count;++variant) ids.push_back(ground_guid(0x12,variant));
     std::vector<std::vector<fb::Guid>> buckets(ids.size());
     for (const auto& id:ids) buckets[fb::toc_hash(id.bytes)%ids.size()].push_back(id);
     std::stable_sort(buckets.begin(),buckets.end(),[](const auto& a,const auto& b){return a.size()>b.size();});
@@ -111,7 +84,7 @@ void verify_blood_chunk_hashes() {
         if (!found) throw std::runtime_error("Private blood chunks cannot form a bounded native TOC hash");
     }
 }
-template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit&& output) {
+template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,const fs::path& textures,Emit&& output) {
     verify_blood_chunk_hashes();
     constexpr auto donor="win32/levels/game/bam_levelroot/wproot/wp/s9600_x0z0/s200_x500z1100/s100_x450z1150/s50_x425z1175_sublevel";
     constexpr auto stem="world/materials/decal/graffiti_large_01_4x2m/decal_graffiti_large_01_4x2m";
@@ -129,19 +102,20 @@ template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit
         a=*found; return data.read(*bundle->payload(kind,index));
     };
     for (unsigned variant=0;variant<ground_variant_count;++variant) {
-    const auto output_stem=std::string("world/materials/decal/reskate_blood/reskate_blood")+ground_suffixes[variant%4]+std::string(blood::assets::blood_color_suffixes[variant/4]);
-    auto image=blood_smear_image(variant%4);
+    const unsigned shape=variant%ground_shape_count,color=variant/ground_shape_count;
+    const auto output_stem=blood::assets::blood_ground_stem(shape,color);
+    auto image=blood_decal_image(textures,shape);
     for (std::size_t p=0;p<image.rgba.size();p+=4) {
-        const auto rgb=blood::assets::blood_pixel(static_cast<blood::assets::BloodColor>(variant/4),image.rgba[p],image.rgba[p+1],image.rgba[p+2]);
+        const auto rgb=blood::assets::blood_pixel(static_cast<blood::assets::BloodColor>(color),image.rgba[p],image.rgba[p+1],image.rgba[p+2]);
         std::copy(rgb.begin(),rgb.end(),image.rgba.begin()+p);
     }
 
   const auto color_file=ground_guid(0x10,variant);
   const auto color_class=ground_guid(0x11,variant);
-  const auto normal_file=ground_guid(0x20,variant);
-  const auto normal_class=ground_guid(0x21,variant);
-  const auto opacity_file=ground_guid(0x30,variant);
-  const auto opacity_class=ground_guid(0x31,variant);
+  const auto normal_file=ground_guid(0x20);
+  const auto normal_class=ground_guid(0x21);
+  const auto opacity_file=ground_guid(0x30,shape);
+  const auto opacity_class=ground_guid(0x31,shape);
   const auto material_key=ground_key(variant);
   struct Binding {fb::Guid old_file,old_class,new_file,new_class;};
   std::vector<Binding> bindings;
@@ -154,9 +128,11 @@ template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit
    const auto file=normal?normal_file:opacity?opacity_file:color_file,klass=normal?normal_class:opacity?opacity_class:color_class;
    bindings.push_back({doc.fileGuid,instance.instanceGuid,file,klass});
    doc.fileGuid=file;instance.instanceGuid=klass;
-   const auto name=std::string(output_stem)+suffix;
+   const auto name=blood::assets::blood_ground_stem(normal?0:shape,normal || opacity?0:color)+suffix;
+   // Bind each material to the same mask/normal asset, not four copies of it.
+   if ((normal && variant!=0) || (opacity && color!=0)) continue;
    field(*instance.object,"Name").data=name;
-   const std::uint64_t rid=(normal?0x5ba7a219be430023ULL:opacity?0x5ba7a219be430025ULL:0x5ba7a219be430021ULL)+variant*0x100;
+   const std::uint64_t rid=(normal?0x5ba7a219be430023ULL:opacity?0x5ba7a219be430025ULL:0x5ba7a219be430021ULL)+(normal?0:opacity?shape:variant)*0x100;
    field(*instance.object,"Resource").data=ebx::ResourceReference{rid};
    const std::uint32_t width=normal?4:image.width,height=normal?4:image.height;
    field(*instance.object,"AuthoredWidth").data=std::uint64_t(width);
@@ -171,7 +147,7 @@ template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit
    ebx_asset.name=name;emit(fb::AssetKind::ebx,ebx_asset,authored_ebx);
    auto texture=read(fb::AssetKind::resource,std::string(stem)+suffix,res_asset);
    if(texture.size()!=180 || get<std::uint32_t>(res_asset.resourceMeta,0)!=12)throw std::runtime_error("Unexpected texture format");
-   const auto chunk=normal?ground_guid(0x22,variant):opacity?ground_guid(0x32,variant):ground_guid(0x12,variant);
+   const auto chunk=normal?ground_guid(0x22):opacity?ground_guid(0x32,shape):ground_guid(0x12,variant);
    put(texture,12,std::uint32_t(normal || opacity?18:20)); // Linear packed data / sRGB color.
    // Retain the donor's native usage flags. Streaming residency is carried
    // separately in RES metadata and the authored mip data.
@@ -184,7 +160,9 @@ template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit
    fb::Image mip=image;
    if(normal) {mip={4,4,std::vector<std::uint8_t>(64)};for(std::size_t p=0;p<64;p+=4){mip.rgba[p]=128;mip.rgba[p+1]=128;mip.rgba[p+2]=255;mip.rgba[p+3]=255;}}
    // The stock OSM's red channel is the graffiti opacity mask. Color alpha
-   // alone does not supply it. Use a rough surface with no metalness to avoid bright glossy ribbons.
+   // alone does not supply it. Preserve the verified donor finish and flat normal
+   // until its full normal/specular packing is established. Generic lab normal
+   // and roughness PNGs are deliberately not treated as native packed maps.
    if(opacity)for(std::size_t p=0;p<mip.rgba.size();p+=4) {mip.rgba[p]=image.rgba[p+3];mip.rgba[p+1]=185;mip.rgba[p+2]=0;mip.rgba[p+3]=255;}
    const auto expected_image=mip;
    std::vector<std::byte> pixels;std::uint8_t count{};
@@ -257,7 +235,7 @@ template<class Emit> void author_blood_ground(dingosdk::vfs::GameData& data,Emit
    params_hash=(params_hash^std::to_integer<unsigned char>(depot[p]))*1099511628211ULL;
   if(params_hash==get<std::uint64_t>(depot,block+8))throw std::runtime_error("Parameter cache identity did not change");
   put(depot,block+8,params_hash);
-  depot_asset.name=std::string("world/materials/decal/reskate_blood/shaderblockdepot_blood_ground")+ground_suffixes[variant%4]+std::string(blood::assets::blood_color_suffixes[variant/4]);
+  depot_asset.name=std::string("world/materials/decal/reskate_blood/shaderblockdepot_blood_ground_")+blood::assets::blood_ground_shapes[shape]+blood::assets::blood_color_suffixes[color];
   depot_asset.resourceId=0x5ba7a219be430029ULL+variant*0x100;emit(fb::AssetKind::resource,depot_asset,depot);
 }
 }

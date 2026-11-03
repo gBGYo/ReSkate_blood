@@ -67,7 +67,7 @@ end
 load_plugin()
 check(menu~=nil and commands.blood~=nil,"The entry registers its menu and console command")
 command("test")
-check(lines[#lines]=="blood: 20 tests passed","All original model tests ran")
+check(lines[#lines]=="blood: 21 tests passed","All model and generated decal tests ran")
 fall()
 check(count()==0,"Effects start disabled")
 command("on")

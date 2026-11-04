@@ -3,6 +3,14 @@ local Ground = {}
 Ground.__index = Ground
 local colors={"","_green","_blue","_pink"}
 local variant_count=5
+local missing_handle="that effect does not belong to this plugin"
+local function decal_call(operation,...)
+    -- A receiver can stream out without a world reset. The SDK has no handle
+    -- validity query, so catch only its stale-handle error and discard the mark.
+    local ok,why=pcall(operation,...)
+    if not ok and (type(why)~="string" or why:sub(-#missing_handle)~=missing_handle) then error(why,0) end
+    return ok
+end
 local function cell(x,y,z) return x..":"..y..":"..z end
 local function surface(b)
     return b and b.contact and b.normal and b.point and not b.board and
@@ -55,7 +63,7 @@ local function overlap(a,b)
 end
 function Ground.new(api) return setmetatable({api=api,marks={},cells={},largest=0,wounds={},episodes={},spawned=0,retired=0},Ground) end
 function Ground:clear()
-    for _,m in self.marks do self.api.release(m.handle) end
+    for _,m in self.marks do decal_call(self.api.release,m.handle) end
     self.marks,self.cells,self.wounds,self.episodes,self.largest={},{},{},{},0
 end
 function Ground:unindex(m)
@@ -64,6 +72,11 @@ function Ground:unindex(m)
     local i=table.find(list,m)
     if i then table.remove(list,i) end
     if #list==0 then self.cells[m.cell]=nil end
+end
+function Ground:discard(index)
+    local m=self.marks[index]
+    self:unindex(m); table.remove(self.marks,index)
+    if m.retirement then self.retiring-=1; self.retired+=1 end
 end
 function Ground:crowded(m)
     local p=m.point
@@ -155,8 +168,7 @@ function Ground:step(f,hits,o)
         local m=self.marks[i]; m.age+=f.dt
         if m.retirement then m.retirement-=f.dt; self.retiring+=1 end
         if m.age>=m.lifetime or (m.retirement and m.retirement<=0) then
-            self:unindex(m); self.api.release(m.handle); table.remove(self.marks,i)
-            if m.retirement then self.retiring-=1; self.retired+=1 end
+            decal_call(self.api.release,m.handle); self:discard(i)
         end
     end
     if not f.bailed then self.wounds,self.episodes={},{}; return end
@@ -215,9 +227,13 @@ function Ground:step(f,hits,o)
     end
 end
 function Ground:render()
-    for _,m in self.marks do
+    for i=#self.marks,1,-1 do
+        local m=self.marks[i]
         local value=math.floor(alpha(m)*255+.5)
-        if value~=m.opacity then self.api.opacity(m.handle,value/255); m.opacity=value end
+        if value~=m.opacity then
+            if decal_call(self.api.opacity,m.handle,value/255) then m.opacity=value
+            else self:discard(i) end
+        end
     end
 end
 return Ground

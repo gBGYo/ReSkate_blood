@@ -1,3 +1,7 @@
+# 0.1.2
+
+- Fix plugin crash when trying to remove unloaded decals
+
 # 0.1.1
 
 - Replaces the four striped ground shapes with 20 generated splashes, smears, pools and droplet clusters.

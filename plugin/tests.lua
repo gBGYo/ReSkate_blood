@@ -12,8 +12,14 @@ local function recorder()
     api.decal=function(asset,matrix,options) return make(asset,matrix,"decals",options) end
     api.move=function(id,matrix) assert(r.live[id]); r.live[id].matrix=matrix end
     api.stop=function(id) assert(r.live[id]); r.stopped+=1 end
-    api.opacity=function(id,value) assert(r.live[id] and value>=0 and value<=1); r.faded+=1 end
-    api.release=function(id) assert(r.live[id]); r.live[id]=nil; r.released+=1 end
+    api.opacity=function(id,value)
+        assert(r.live[id], "that effect does not belong to this plugin")
+        assert(value>=0 and value<=1); r.faded+=1
+    end
+    api.release=function(id)
+        assert(r.live[id], "that effect does not belong to this plugin")
+        r.live[id]=nil; r.released+=1
+    end
     api.clear=function() r.live={} end
     return r,api
 end
@@ -35,6 +41,15 @@ return {run=function()
         local r,api=recorder(); local m=Model.new(api); local o=Model.options({enabled=true})
         m:step(event(0,false,nil),o)
         return r,m,o
+    end
+    local function stains()
+        local r,api=recorder(); local g=Ground.new(api)
+        g.options=Model.options({enabled=true}); g.retiring=0
+        for i=1,3 do
+            g:stamp(vector.create(i*3,0,0),V.up,vector.create(1,0,0),.2,.2,1,1,true,false,"splash")
+        end
+        assert(#g.marks==3)
+        return r,g,api
     end
     test("off by default and corrupt preferences",function()
         local o=Model.options({enabled="yes",color=9,width=0/0,lifetime=0})
@@ -96,6 +111,47 @@ return {run=function()
         local r,m,o=fresh(); o.lifetime=10; m:step(event(50,true,12),o)
         for i=2,203 do m:step(event(i*50,false,nil),o); m:render() end
         assert(r.faded>0 and next(r.live)==nil and #m.ground.marks==0)
+    end)
+    test("streamed-out decals are discarded during fading",function()
+        local r,g=stains()
+        local first,second,survivor=g.marks[1],g.marks[2],g.marks[3]
+        r.live[first.handle],r.live[second.handle]=nil,nil
+        for _,m in g.marks do m.age=m.lifetime-4 end
+        g:render(); g:render()
+        assert(#g.marks==1 and g.marks[1]==survivor and r.faded==1)
+        assert(g.cells[first.cell]==nil and g.cells[second.cell]==nil)
+        assert(g.cells[survivor.cell][1]==survivor and r.live[survivor.handle])
+        g:stamp(V.zero,V.up,vector.create(1,0,0),.2,.2,1,1,true,false,"splash")
+        assert(#g.marks==2 and r.decals==4,"New stains still work after receiver loss")
+    end)
+    test("streamed-out decals can expire before their next render",function()
+        local r,g=stains(); local expired=g.marks[2]
+        r.live[expired.handle]=nil; expired.age=expired.lifetime
+        g:step({dt=.05,center=V.zero,bailed=false},{},g.options)
+        assert(#g.marks==2 and g.cells[expired.cell]==nil)
+        g:clear(); assert(next(r.live)==nil and r.released==2)
+    end)
+    test("clearing tolerates already removed decals",function()
+        local r,g=stains()
+        r.live[g.marks[1].handle],r.live[g.marks[3].handle]=nil,nil
+        g:clear(); g:clear()
+        assert(#g.marks==0 and next(g.cells)==nil and next(r.live)==nil and r.released==1)
+    end)
+    test("lost retiring decals return their retirement slot",function()
+        local r,g=stains(); local retired=g.marks[2]
+        retired.retirement=1; g.retiring=1; r.live[retired.handle]=nil
+        g:render()
+        assert(#g.marks==2 and g.retiring==0 and g.retired==1 and g.cells[retired.cell]==nil)
+    end)
+    test("unrelated decal errors remain visible",function()
+        local _,g,api=stains()
+        for _,m in g.marks do m.age=m.lifetime-4 end
+        api.opacity=function() error("at most 8192 effect operations in a tick") end
+        local ok,why=pcall(function() g:render() end)
+        assert(not ok and tostring(why):find("8192") and #g.marks==3)
+        api.release=function() error("unexpected release failure") end
+        ok,why=pcall(function() g:clear() end)
+        assert(not ok and tostring(why):find("unexpected release failure") and #g.marks==3)
     end)
     test("missing renderer never queues old effects",function()
         local r,api=recorder(); api.particle=function() return nil end; api.decal=function() return nil end

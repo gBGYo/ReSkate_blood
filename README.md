@@ -128,7 +128,7 @@ also accepts `--version <major.minor.patch>` to override the package version.
 
 The Python tests check the build workflow with fake tools, recipe freshness, asset integrity,
 manifest declarations and ZIP contents using temporary fixtures. The second command uses a
-standalone Luau interpreter to run 21 model/decal tests and the plugin
+standalone Luau interpreter to run 26 model/decal tests and the plugin
 lifecycle checks with a fake effects service. It also accepts `luau` on PATH by default.
 In the game, `blood test` runs the same model/decal tests.
 
